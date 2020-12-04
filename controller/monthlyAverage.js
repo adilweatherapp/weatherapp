@@ -52,7 +52,7 @@ module.exports.index = (event, context, callback) => {
                 .then((body) => {
                   if (status !== 200) {
                     mongoose.connection.close();
-                    callback(null, commonHelper.errorResponse('No matching location found!'));
+                    callback(null, commonHelper.errorResponse('The location not found'));
                   } else {
                     const re = new RegExp('var data=(.*);', 'gi');
                     const degrees = JSON.parse(re.exec(body)[1]);
