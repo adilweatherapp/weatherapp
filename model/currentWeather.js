@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 
-const model = mongoose.model('Weather', {
+const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -54,5 +54,9 @@ const model = mongoose.model('Weather', {
     integer: true,
   },
 });
+
+schema.index({ created_at_: -1, name: -1 });
+
+const model = mongoose.model('Weather', schema);
 
 module.exports = model;

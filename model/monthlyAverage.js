@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 
-const model = mongoose.model('MonthlyAverage', {
+const schema = new mongoose.Schema({
   month: {
     type: String,
     required: true,
@@ -30,5 +30,9 @@ const model = mongoose.model('MonthlyAverage', {
     default: () => Date.now(),
   },
 });
+
+schema.index({ created_at_: -1, country: 1, month: 1, city: 1 });
+
+const model = mongoose.model('MonthlyAverage', schema);
 
 module.exports = model;
